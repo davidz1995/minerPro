@@ -3,14 +3,15 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+    DB_NAME, DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+  logging: false, 
+  native: false,
   omitNull: false
 });
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -31,17 +32,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Country, Turistic_activity} = sequelize.models;
+const { User } = sequelize.models;
 
 // Relaciones
 
-Country.belongsToMany(Turistic_activity, {
+/* Country.belongsToMany(Turistic_activity, {
   through: 'country_activities'
 });
 Turistic_activity.belongsToMany(Country, {
   through: 'country_activities'
 }); 
-
+ */
 module.exports = {
   ...sequelize.models, 
   conn: sequelize,
