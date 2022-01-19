@@ -1,0 +1,22 @@
+.nav_link_container{
+    min-width: 8em;
+}
+.linkNavBar {
+    font-size: .85rem;
+    text-decoration: none;
+    color: rgb(180, 180, 180);
+}
+.linkNavBar:hover{
+   color: white !important;
+   font-weight: bolder;
+}
+.divider{
+    color: white;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .divider {
+        transform: rotate(90deg);
+    }
+  }
