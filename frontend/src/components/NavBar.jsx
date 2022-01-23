@@ -12,10 +12,9 @@ function NavBar(props) {
     const menuOptions = navBarOptions()
 
     return (
-        <div style={{position:'relative', zIndex:5, width:'100%'}}>
+        <div style={{position:'initial', zIndex:5}}>
         <Navbar collapseOnSelect expand="lg" variant={variant} bg={bg} className='container_navbar'>
-        <Container>
-        <Navbar.Brand href="#home"></Navbar.Brand>
+        <Container style={{justifyContent:'flex-end'}}>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
@@ -23,7 +22,7 @@ function NavBar(props) {
             <p className='divider'>|</p>
             {menuOptions.length &&
                 menuOptions.map((element, index) => { return (
-                    <Nav className="me-auto" key={index}>
+                    <Nav key={index}>
                         <Link 
                             to={`/${element.route}`} 
                             className='linkNavBar'

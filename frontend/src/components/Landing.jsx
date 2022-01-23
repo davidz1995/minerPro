@@ -7,7 +7,7 @@ import '../styles/landing.css'
 function Landing() {
     return (
         <div className='container_landing'>
-            <NavBar variant={null} bg={null}/>
+            <NavBar variant='dark' bg={null}/>
             <BodyLanding/>
             <div style={{position:'relative'}}>
                 <ParticlesComponent/>

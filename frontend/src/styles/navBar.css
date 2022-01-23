@@ -1,14 +1,8 @@
-.container_navbar{
-    position: fixed;
-}
-.nav_link_container{
-    min-width: 8em;
-}
 .linkNavBar {
     font-size: .85rem;
     text-decoration: none;
     color: rgb(180, 180, 180);
-    width: 14em;
+    min-width: 12em;
     align-self: center;
     z-index: 1;
 }
@@ -27,6 +21,6 @@
         transform: rotate(90deg);
     }
     .container_navbar{
-        background-color: black;
+        background-color:black;
     }
   }

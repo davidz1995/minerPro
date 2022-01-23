@@ -14,7 +14,7 @@ function GPUvsASIC() {
     let desGPU = descriptionGPU()
 
   return (
-    <div style={{display:'block', marginBottom: '-31px'}}>
+    <div style={{display:'block', marginBottom: '-31px', minHeight:'100vh', height:'maxContent'}}>
         <NavBar variant='dark' bg='black'/>
         {desASIC && desGPU ?
             <Carousel>
@@ -28,8 +28,8 @@ function GPUvsASIC() {
                 <Carousel.Caption style={{backgroundColor:'rgba(0, 0, 0, 0.750)', borderRadius:'40px', padding:'10px'}}>
                 <h2>{desGPU.title}</h2>
                 {desGPU.description.length &&
-                    desGPU.description.map(line => {return (
-                        <p>{line}</p>
+                    desGPU.description.map((line, index) => {return (
+                        <p key={index}>{line}</p>
                     )})
                 }
                 </Carousel.Caption>

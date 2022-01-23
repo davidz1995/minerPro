@@ -5,21 +5,21 @@ import faq from '../utils/faq';
 
 const Faq = () => {
     let questionAnswer = faq()
-    console.log(questionAnswer);
   return (
-  <div>
+  <div style={{display:'block', marginBottom: '-31px', minHeight:'100vh', justifyContent:'center'}}>
     <NavBar variant='dark' bg='black'/>
+    <h2 style={{color:'white', fontWeight:'bold', paddingBottom:'10px', textAlign:'left', marginLeft:'5%'}}>Preguntas frecuentes</h2>
     {questionAnswer.length &&
         questionAnswer.map(((element, index) => { return (
-            <Accordion key={index}>
+            <Accordion key={index} style={{paddingBottom:'10px', width:'90%', marginLeft:'5%'}}>
             <Accordion.Item eventKey="1">
             <Accordion.Header>
                 {element.question}
             </Accordion.Header>
             {typeof element.answer === 'object'?
                 <Accordion.Body style={{textAlign:'left'}}>
-                {element.answer.description}
-                {element.answer.variables.map((element, index) => {return (
+                {element.answer.intro}
+                {element.answer.text.map((element, index) => {return (
                      <Accordion.Body key={index}>{element}</Accordion.Body>
                 )
                 })}
