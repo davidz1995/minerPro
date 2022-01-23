@@ -1,12 +1,15 @@
 import React from 'react'
+import BodyLanding from './BodyLanding'
 import NavBar from './NavBar'
 import ParticlesComponent from './ParticlesComponent'
+import '../styles/landing.css'
 
 function Landing() {
     return (
-        <div>
-            <NavBar/>
-            <div>
+        <div className='container_landing'>
+            <NavBar variant={null} bg={null}/>
+            <BodyLanding/>
+            <div style={{position:'relative'}}>
                 <ParticlesComponent/>
             </div>
         </div>

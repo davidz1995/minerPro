@@ -5,28 +5,63 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 
-function NavBar() {
+function NavBar(props) {
+
+    const { variant, bg} = props
+
+    const menuOptions = navBarOptions()
+
     return (
-        <div style={{position:'absolute', zIndex:10, width:'100%'}}>
-        <Navbar collapseOnSelect expand="lg" variant="dark" style={{paddingTop:'2em', paddingBottom:'1.5em' }}>
+        <div style={{position:'relative', zIndex:5, width:'100%'}}>
+        <Navbar collapseOnSelect expand="lg" variant={variant} bg={bg} className='container_navbar'>
         <Container>
         <Navbar.Brand href="#home"></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-            <Nav.Link className="nav_link_container"><Link to="/" className='linkNavBar'>Minería - GPU vs ASIC</Link></Nav.Link>
+        <Nav className="me-auto">
+            <Link to="/" className='linkNavBar'>00 : Home</Link>
             <p className='divider'>|</p>
-            <Nav.Link className="nav_link_container"><Link to="/router" className='linkNavBar'>Nuestros productos</Link></Nav.Link>
-            <p className='divider'>|</p>
-            <Nav.Link className="nav_link_container"><Link to="/" className='linkNavBar'>FAQ</Link></Nav.Link>
-            <p className='divider'>|</p>
-            <Nav.Link className="nav_link_container"><Link to="/" className='linkNavBar'>Contacto</Link></Nav.Link>
-            </Nav>
+            {menuOptions.length &&
+                menuOptions.map((element, index) => { return (
+                    <Nav className="me-auto" key={index}>
+                        <Link 
+                            to={`/${element.route}`} 
+                            className='linkNavBar'
+                            key={index}
+                        >
+                        {element.option}
+                        </Link>
+                        <p className='divider'>|</p>
+                    </Nav>
+                )}) 
+            }
+        </Nav>
         </Navbar.Collapse>
         </Container>
         </Navbar>
         </div>
     )
+}
+
+const navBarOptions = () => {
+    return [
+        {
+            option: '01  :  Minería - GPU vs ASIC',
+            route: 'info'
+        },
+        {
+            option: '02  :  Nuestros productos',
+            route: 'productos'
+        },
+        {
+            option: '03  :  FAQ',
+            route: 'faq'
+        },
+        {
+            option: '04  :  Contacto',
+            route: 'contacto'
+        },
+    ]
 }
 
 export default NavBar

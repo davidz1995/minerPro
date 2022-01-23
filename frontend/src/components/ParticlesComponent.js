@@ -1,5 +1,6 @@
 import React from 'react'
 import Particles from "react-tsparticles";
+import '../styles/landing.css'
 
 function ParticlesComponent() {
     return (
@@ -10,7 +11,7 @@ function ParticlesComponent() {
                     "autoPlay": true,
                     "background": {
                         "color": {
-                        "value": "#0000"
+                        "value": ""
                         },
                         "image": "",
                         "position": "50% 50%",

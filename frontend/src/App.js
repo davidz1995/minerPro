@@ -4,8 +4,9 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-//import NavBar from './components/NavBar';
 import Landing from './components/Landing'
+import GPUvsASIC from './components/GPUvsASIC';
+import Faq from './components/Faq';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <div className="App">
       <Routes>
         <Route exact path='/' element={<Landing/>}/>
+        <Route exact path='/info' element={<GPUvsASIC/>}/>
+        <Route exact path='/faq' element={<Faq/>}/>
       </Routes>
       </div>
     </Router>
