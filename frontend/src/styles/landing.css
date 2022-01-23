@@ -12,13 +12,13 @@
     position: relative;
     width: 100%;
     z-index: 2;
-    margin-top: 14%;
 }
 
 .logo_minerPro{
     width: 20%;
     float: left;
     margin-left: 9.5%;
+    margin-top: 18%;
 }
 
 @media (max-width: 600px) {

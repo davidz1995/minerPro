@@ -17,7 +17,7 @@ function GPUvsASIC() {
     <div style={{display:'block', marginBottom: '-31px', minHeight:'100vh', height:'maxContent'}}>
         <NavBar variant='dark' bg='black'/>
         {desASIC && desGPU ?
-            <Carousel>
+            <Carousel style={{paddingTop:'5em'}}>
             <Carousel.Item interval={5000}>
                 <img
                 className="d-block w-100"
@@ -44,8 +44,8 @@ function GPUvsASIC() {
                 <Carousel.Caption style={{backgroundColor:'rgba(0, 0, 0, 0.750)', borderRadius:'40px', padding:'10px'}}>
                 <h2>{desASIC.title}</h2>
                 {desASIC.description.length &&
-                    desGPU.description.map(line => {return (
-                        <p>{line}</p>
+                    desGPU.description.map((line, index) => {return (
+                        <p key={index}>{line}</p>
                     )})
                 }
                 </Carousel.Caption>

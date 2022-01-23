@@ -12,7 +12,7 @@ function NavBar(props) {
     const menuOptions = navBarOptions()
 
     return (
-        <div style={{position:'initial', zIndex:5}}>
+        <div style={{position:'fixed', zIndex:5, width:'100%'}}>
         <Navbar collapseOnSelect expand="lg" variant={variant} bg={bg} className='container_navbar'>
         <Container style={{justifyContent:'flex-end'}}>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
@@ -50,7 +50,7 @@ const navBarOptions = () => {
         },
         {
             option: '02  :  Nuestros productos',
-            route: 'productos'
+            route: 'products'
         },
         {
             option: '03  :  FAQ',
@@ -58,7 +58,7 @@ const navBarOptions = () => {
         },
         {
             option: '04  :  Contacto',
-            route: 'contacto'
+            route: 'contact'
         },
     ]
 }
