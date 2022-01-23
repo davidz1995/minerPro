@@ -49,14 +49,19 @@
     .container_contact{
         display: flex;
         flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        margin-left: 20%;
+        margin-left: 0%;
+    }
+    .container_socials{
+        margin-left: -10%;
     }
     .container_socials h3{
         text-align: left;
     }
     .form_contact{
-        margin-bottom: 9em;
+        margin-bottom: 10em;
     }
     .input_contact{
         height: 2em;
@@ -74,14 +79,20 @@
     .container_contact{
         display: flex;
         flex-direction: column-reverse;
-        width: 80%;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-left: 0%;
+    }
+    .container_socials{
+        margin-left: -35%;
     }
     .container_socials h3{
         text-align: left;
         font-weight: bolder;
     }
     .form_contact{
-        margin-bottom: 9em;
+        margin-bottom: 35em;
     }
     .input_contact{
         height: 2em;
@@ -94,3 +105,33 @@
         margin-bottom: .5em;
     }
 }
+
+@media (min-width:365px) and (max-width: 550px) {
+    .container_contact{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-left: 0%;
+    }
+    .container_socials{
+        margin-left: -15%;
+    }
+    .container_socials h3{
+        text-align: left;
+    }
+    .form_contact{
+        margin-bottom: 25em;
+    }
+    .input_contact{
+        height: 2em;
+        margin-bottom: .5em;
+        margin-top: .5em;
+    }
+    .input_contact_text{
+        height: 5em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+    }
+  }

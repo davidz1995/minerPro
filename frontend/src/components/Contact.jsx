@@ -36,7 +36,7 @@ const Socials = () => {
         <label className='subcontainer_socials' ><PhoneAndroidIcon /><p>{contactInfo.phone}</p></label>
         <label className='subcontainer_socials' ><AlternateEmailIcon /><p>{contactInfo.email}</p></label>
         <h3>Redes sociales</h3>
-        <div style={{textAlign:'left'}}>
+        <div style={{textAlign:'left', marginBottom:'1em'}}>
         <FacebookIcon className='socials_icons' onClick={() => console.log('hola')}/>
         <InstagramIcon className='socials_icons' onClick={() => console.log('hola')}/>
         </div>
