@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const { UUID } = require("uuid");
 
 module.exports = (sequelize) => {
-  sequelize.define("user", {
+  sequelize.define("miner", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -12,25 +12,25 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    placas: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    id_simplemining: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    housing_fee: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    user_simplemining: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isAdmin: {
+    pass_simplemining: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-    },
-    wallet: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    }
   });
 };

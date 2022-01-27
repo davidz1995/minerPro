@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const { UUID } = require("uuid");
 
 module.exports = (sequelize) => {
-  sequelize.define("user", {
+  sequelize.define("farm", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -12,23 +12,15 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    gpus: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    isAdmin: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-    wallet: {
+    restarts: {
       type: DataTypes.STRING,
       allowNull: false,
     },
