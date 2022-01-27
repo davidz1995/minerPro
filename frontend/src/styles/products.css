@@ -1,0 +1,18 @@
+.container_products{
+    width: 100%;
+    min-height: 100vh;
+    height: max-content;
+    display:block;
+    margin-bottom: -31px;
+}
+.cards_container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 8em;
+    flex-wrap: wrap;
+}
+.card{
+    width: 40%;
+    margin: 1em 
+}

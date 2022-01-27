@@ -1,15 +1,15 @@
-import { GET_CHARACTERS_BY_FILMS } from "./actions/actionTypes";
+import { GET_ALL_PRODUCTS } from "./actions/actionTypes";
 
 const initialState = {
-    charactersByFilms: [],
+    products: [],
   };
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case GET_CHARACTERS_BY_FILMS :
+    case GET_ALL_PRODUCTS :
       return {
         ...state,
-        charactersByFilms:action.payload
+        products:action.payload
       }
     default :
         return {
