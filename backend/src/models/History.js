@@ -9,16 +9,17 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     date: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
+      defaultValue: Date.now,
       allowNull: false,
     },
     eth: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-    usd: {
-      type: DataTypes.STRING,
+      type: DataTypes.NUMBER,
       allowNull: false,
-    }
+    },
+    usd: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
   });
 };

@@ -13,15 +13,17 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-    gpus: {
       type: DataTypes.STRING,
+      defaultValue: "Offline",
+      allowNull: false,
+    },
+    gpus: {
+      type: DataTypes.NUMBER,
       allowNull: false,
     },
     restarts: {
-      type: DataTypes.STRING,
+      type: DataTypes.NUMBER,
+      defaultValue: 0,
       allowNull: false,
     },
   });

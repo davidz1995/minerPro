@@ -8,7 +8,7 @@ class UserModel {
   }
 
   add = async (req, res, next) => {
-    const { name, lastName, email, password, isAdmin } = req.body;
+    const { name, lastName, email, password, isAdmin, wallet } = req.body;
     let verifyExist = await this.model.findOne({ where: { email: email } });
     if (!verifyExist) {
       await this.model
@@ -18,6 +18,7 @@ class UserModel {
           email,
           password: bcrypt.hashSync(password, 10),
           isAdmin,
+          wallet,
         })
         .then((createdElement) => res.send(createdElement))
         .catch((error) => next(error));
@@ -43,7 +44,11 @@ class UserModel {
             expiresIn: "1d",
           }
         );
-        res.status(200).send({ user: user.email, token: token });
+        res.status(200).send({
+          userData: { user: user.email, name: user.name, wallet: user.wallet,  },
+          isAdmin: user.isAdmin,
+          token: token,
+        });
       } else {
         res.status(400).send("Incorrect password");
       }
