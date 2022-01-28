@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     placas: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     id_simplemining: {
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     housing_fee: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     user_simplemining: {

@@ -18,11 +18,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     gpus: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     restarts: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },

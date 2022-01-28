@@ -14,11 +14,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     eth: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     usd: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   });
