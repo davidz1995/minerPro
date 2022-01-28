@@ -25,15 +25,13 @@ const Products = () => {
     <div className="container_products">
       <NavBar variant="dark" bg="black" />
       {products ? (
-        <Container style={{marginLeft:'10%'}}>
+        <Container>
           <Row>
             <Col>
               <div className="cards_container">
                 {products.map((product) => {
                   return (
-                    <Card
-                      className='card'
-                    >
+                    <Card className="card">
                       <CardMedia
                         component="img"
                         height="140"
