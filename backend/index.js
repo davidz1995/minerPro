@@ -15,7 +15,7 @@ mongoose.connect(MONGO_CONNECTION)
 })
 
 conn.sync({
-  force: false
+  force: true
 }).then(() => {
     console.log('Conectado a PSQL')
     server.listen(PORT, () => {

@@ -17,11 +17,11 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     gpus: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     restarts: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   });
