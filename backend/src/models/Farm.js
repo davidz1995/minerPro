@@ -14,6 +14,7 @@ module.exports = (sequelize) => {
     },
     status: {
         type: DataTypes.STRING,
+        defaultValue:'Offline',
         allowNull: false,
       },
     gpus: {
@@ -22,6 +23,7 @@ module.exports = (sequelize) => {
     },
     restarts: {
       type: DataTypes.INTEGER,
+      defaultValue:0,
       allowNull: false,
     },
   });

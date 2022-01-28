@@ -13,23 +13,23 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     placas: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     id_simplemining: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     housing_fee: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     user_simplemining: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     pass_simplemining: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
     }
   });
