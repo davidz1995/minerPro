@@ -21,6 +21,6 @@ module.exports = (sequelize) => {
     usd: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    }
+    },
   });
 };

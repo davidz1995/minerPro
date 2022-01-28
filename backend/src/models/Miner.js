@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     placas: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     id_simplemining: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -31,6 +31,6 @@ module.exports = (sequelize) => {
     pass_simplemining: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   });
 };
