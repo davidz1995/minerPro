@@ -6,3 +6,30 @@ p{
     font-weight: bold;
     font-size: .9rem;
 }
+
+.carousel{
+    padding-top: 5%;
+}
+
+@media (max-width: 500px) {
+    .img_carousel{
+        height: 90vh !important;
+        width: 0% !important;
+        background-size: inherit !important;
+    }
+  }
+@media (max-width: 420px) {
+.carousel_caption{
+    padding: 0px !important;
+}
+}
+@media (max-width: 400px) {
+.carousel_caption p {
+    font-size: .8rem;
+}
+}
+@media (max-width: 320px) {
+    .carousel_caption p {
+        font-size: .7rem;
+    }
+  }

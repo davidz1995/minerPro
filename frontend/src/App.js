@@ -5,7 +5,7 @@ import GPUvsASIC from "./components/GPUvsASIC";
 import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import Products from "./components/Products";
-import Login from "./components/Login.jsx";
+import Login from "./components/Login";
 function App() {
   return (
     <div>

@@ -14,7 +14,7 @@ const Login = () => {
         let { user, isAdmin, token } = response.data;
         if (isAdmin) {
           response.status === 200 &&
-            localStorage.setItem("prueba", response.data.token);
+            localStorage.setItem("prueba", token);
             window.location.href = '/panelAdmin'
         } else {
             window.location.href = '/panelClient'
@@ -65,8 +65,4 @@ const Login = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Login;
-=======
-export default Login;
->>>>>>> 8cbc64e128501893ed3864430fa22329c6c45d18
