@@ -24,6 +24,7 @@ const Products = () => {
   return (
     <div className="container_products">
       <NavBar variant="dark" bg="black" />
+      <h2 style={{color:'white', fontWeight:'bold', paddingBottom:'10px', textAlign:'center', marginLeft:'5%', paddingTop:'3em'}}>Nuestros Productos</h2>
       {products ? (
         <Container>
           <Row>
@@ -34,7 +35,7 @@ const Products = () => {
                     <Card className="card">
                       <CardMedia
                         component="img"
-                        height="140"
+                        height="300"
                         image={product.thumbnail}
                         alt="Imagen del producto"
                       />

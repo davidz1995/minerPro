@@ -8,7 +8,7 @@ const Faq = () => {
   return (
   <div style={{display:'block', marginBottom: '-31px', minHeight:'100vh', justifyContent:'center'}}>
     <NavBar variant='dark' bg='black'/>
-    <h2 style={{color:'white', fontWeight:'bold', paddingBottom:'10px', textAlign:'left', marginLeft:'5%', paddingTop:'3em'}}>Preguntas frecuentes</h2>
+    <h2 style={{color:'white', fontWeight:'bold', paddingBottom:'1.5em', textAlign:'center', marginLeft:'5%', paddingTop:'3em'}}>Preguntas frecuentes</h2>
     {questionAnswer.length &&
         questionAnswer.map(((element, index) => { return (
             <Accordion key={index} style={{paddingBottom:'10px', width:'90%', marginLeft:'5%'}}>

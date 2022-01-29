@@ -32,8 +32,8 @@ function GPUvsASIC() {
                 width: "90%",
                 backgroundSize: "inherit",
               }}
-              src={gpu}
-              alt="First slide"
+              src="https://i.ibb.co/HhbcSCy/asic-Image.jpg"
+              alt="Second slide"
             />
             <Carousel.Caption
               className="carousel_caption"
@@ -43,8 +43,8 @@ function GPUvsASIC() {
                 padding: "10px",
               }}
             >
-              <h2>{desGPU.title}</h2>
-              {desGPU.description.length &&
+              <h2>Qué es un {desASIC.title}?</h2>
+              {desASIC.description.length &&
                 desGPU.description.map((line, index) => {
                   return <p key={index}>{line}</p>;
                 })}
@@ -58,8 +58,8 @@ function GPUvsASIC() {
                 width: "90%",
                 backgroundSize: "inherit",
               }}
-              src={asic}
-              alt="Second slide"
+              src="https://i.ibb.co/vBZGqGL/gpu.jpg"
+              alt="First slide"
             />
             <Carousel.Caption
               className="carousel_caption"
@@ -69,8 +69,8 @@ function GPUvsASIC() {
                 padding: "10px",
               }}
             >
-              <h2>{desASIC.title}</h2>
-              {desASIC.description.length &&
+              <h2>Qué es un {desGPU.title}?</h2>
+              {desGPU.description.length &&
                 desGPU.description.map((line, index) => {
                   return <p key={index}>{line}</p>;
                 })}
