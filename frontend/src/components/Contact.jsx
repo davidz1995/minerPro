@@ -82,8 +82,7 @@ const ContactUs = () => {
         <Field className='input_contact' name="user_subject" type="text" placeholder='Asunto'/>
         <ErrorMessage className='error_form'  name="user_subject" />
 
-        <Field className='input_contact_text'name="message" type="text" placeholder='Escribe tu mensaje...'/>
-        <ErrorMessage className='error_form' name="message" />
+        <textarea className='text_area' name="user_text" type="text" placeholder='Escribe tu mensaje...'></textarea>
 
         <Button variant='outline-light' type="submit" style={{width:'5em', borderRadius:'0px', marginTop:'1em'}}>Submit</Button>
       </Form>

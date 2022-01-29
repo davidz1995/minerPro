@@ -11,12 +11,13 @@ const Login = () => {
         password: values.password,
       })
       .then((response) => {
-        let { user, isAdmin, token } = response.data;
+        let { user, isAdmin, token } = response.data; //eslint-disable-line
         if (isAdmin) {
           response.status === 200 &&
             localStorage.setItem("prueba", token);
             window.location.href = '/panelAdmin'
         } else {
+            //Aca va el dispatch para mandar los datos del usuario a redux
             window.location.href = '/panelClient'
         }
       })
