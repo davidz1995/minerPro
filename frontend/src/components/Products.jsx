@@ -24,15 +24,26 @@ const Products = () => {
   return (
     <div className="container_products">
       <NavBar variant="dark" bg="black" />
-      <h2 style={{color:'white', fontWeight:'bold', paddingBottom:'10px', textAlign:'center', marginLeft:'5%', paddingTop:'3em'}}>Nuestros Productos</h2>
-      {products ? (
+      <h2
+        style={{
+          color: "white",
+          fontWeight: "bold",
+          paddingBottom: "10px",
+          textAlign: "center",
+          marginLeft: "5%",
+          paddingTop: "3em",
+        }}
+      >
+        Nuestros Productos
+      </h2>
+      {products.length ? (
         <Container>
           <Row>
             <Col>
               <div className="cards_container">
-                {products.map((product) => {
+                {products.map((product, index) => {
                   return (
-                    <Card className="card">
+                    <Card className="card" key={index}>
                       <CardMedia
                         component="img"
                         height="300"
@@ -55,7 +66,7 @@ const Products = () => {
           </Row>
         </Container>
       ) : (
-        <div style={{ paddingTop: "19em", height: "100vh" }}>
+        <div style={{ paddingTop: "9em", height: "100vh" }}>
           <Spinner animation="border" variant="light" role="status"></Spinner>
         </div>
       )}

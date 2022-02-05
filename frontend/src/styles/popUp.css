@@ -1,0 +1,31 @@
+@media (max-width: 1000px) {
+    .pop_up{
+        margin-top:-35em !important;
+        width:50% !important
+    }
+  }
+
+  @media (max-width: 500px) {
+    .pop_up{
+        margin-top:-34em !important;
+        width:60% !important
+    }
+  }
+
+  @media (max-width: 400px) {
+    .pop_up{
+        margin-top:-32em !important;
+        width:60% !important
+    }
+    .pop_up p{
+        font-size:.8rem 
+    }
+    .message_popup{
+        font-size:1rem !important
+    }
+    .button_popup{
+        font-size:.8rem !important;
+        
+    }
+  }
+

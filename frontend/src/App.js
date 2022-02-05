@@ -6,6 +6,8 @@ import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import Products from "./components/Products";
 import Login from "./components/Login";
+import ClientPanel from "./components/Client/ClientPanel";
+import AdminPanel from "./components/Admin/AdminPanel";
 function App() {
   return (
     <div>
@@ -19,7 +21,9 @@ function App() {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/login" element={<Login />} />
             {/* Admin */}
+            <Route exact path="/panelAdmin" element={<AdminPanel />} />
             {/* Client */}
+            <Route exact path="/panelClient" element={<ClientPanel />} />
           </Routes>
         </div>
       </Router>

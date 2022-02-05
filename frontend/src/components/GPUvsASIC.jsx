@@ -4,8 +4,6 @@ import descriptionGPU from "../utils/descripcionGPU";
 import NavBar from "./NavBar";
 import Carousel from "react-bootstrap/Carousel";
 import Spinner from "react-bootstrap/Spinner";
-import gpu from "../assets/images/gpu.jpg";
-import asic from "../assets/images/asicImage.jpg";
 import "../styles/gpuVSasic.css";
 
 function GPUvsASIC() {

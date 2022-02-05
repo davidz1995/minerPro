@@ -1,0 +1,4 @@
+.change-icon:hover{
+    cursor: pointer;
+    transform: rotate(100deg);
+}
