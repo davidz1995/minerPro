@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const routes = require("./routes/index.js");
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/errorHandler');
 require("./db.js");
 
 const server = express();
@@ -29,8 +31,13 @@ server.use((req, res, next) => {
 server.use(cors());
 server.options("*", cors());
 
+server.use(authJwt());
+server.use(errorHandler)
+
+const api = process.env.API_URL
+
 //Routes
-server.use("/api", routes);
+server.use(api, routes);
 
 server.use((err, req, res, next) => {
   const status = err.status || 500;

@@ -17,7 +17,7 @@ mongoose
 
 conn
   .sync({
-    force: true,
+    force: false,
   })
   .then(() => {
     console.log("Conectado a PSQL");
@@ -25,4 +25,4 @@ conn
       console.log(`Estamos en el servidor ${PORT}`);
     });
   })
-  .catch((error) => console.log("hola"));
+  .catch((error) => console.log(error));

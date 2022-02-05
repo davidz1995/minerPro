@@ -41,7 +41,7 @@ class UserModel {
           },
           secret,
           {
-            expiresIn: "1d",
+            expiresIn: "2d",
           }
         );
         res.status(200).send({
