@@ -11,10 +11,11 @@ const Login = () => {
   const clientData = sessionStorage.getItem("clientData");
 
   const handleSubmit = (values) => {
-    //let API_URL = 'https://minerproserver.herokuapp.com/api/users/login'
-    let API_URL = "http://localhost:4000/api/users/login";
+
+    const API_URL = process.env.REACT_APP_LOCAL_API
+
     axios
-      .post(`${API_URL}`, {
+      .post(`${API_URL}/users/login`, {
         email: values.email,
         password: values.password,
       })

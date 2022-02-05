@@ -9,8 +9,9 @@ import {
   SET_BALANCE_ADMIN,
   SET_HISTORY_ADMIN,
   SET_ADMIN,
-  SET_VIEW_PRODUCTS_ADMIN,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  UPDATE_PRODUCT,
+  CREATE_PRODUCT,
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -19,28 +20,29 @@ const initialState = {
   selectedBodyAdmin: "dashboard",
   ethermineData: {},
   etherminePoolStats: {},
-  selectedAdminController: 'viewUsersAdmin',
-  deleteProductMessage: '',
+  deleteProductMessage: "",
+  updateProductMessage: "",
+  createProductMessage: "",
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_PRODUCTS:
+    case GET_ALL_PRODUCTS :
       return {
         ...state,
         products: action.payload,
       };
-    case SET_MINERS:
+    case SET_MINERS :
       return {
         ...state,
         selectedBodyClient: action.payload,
       };
-    case SET_BALANCE:
+    case SET_BALANCE :
       return {
         ...state,
         selectedBodyClient: action.payload,
       };
-    case SET_HISTORY:
+    case SET_HISTORY :
       return {
         ...state,
         selectedBodyClient: action.payload,
@@ -53,38 +55,43 @@ const reducer = (state = initialState, action) => {
     case GET_ETHERMINE_POOLSTATS :
       return {
         ...state,
-        etherminePoolStats: action.payload
+        etherminePoolStats: action.payload,
       };
     case SET_DASHBOARD_ADMIN :
       return {
         ...state,
-        selectedBodyAdmin: action.payload
+        selectedBodyAdmin: action.payload,
       };
-    case SET_ADMIN :
-    return {
-      ...state,
-      selectedBodyAdmin: action.payload
-    };
+    case SET_ADMIN:
+      return {
+        ...state,
+        selectedBodyAdmin: action.payload,
+      };
     case SET_BALANCE_ADMIN :
-    return {
-      ...state,
-      selectedBodyAdmin: action.payload
-    };
+      return {
+        ...state,
+        selectedBodyAdmin: action.payload,
+      };
     case SET_HISTORY_ADMIN :
-    return {
-      ...state,
-      selectedBodyAdmin: action.payload
-    };
-    case SET_VIEW_PRODUCTS_ADMIN :
-    return {
-      ...state,
-      selectedAdminController: action.payload
-    }
+      return {
+        ...state,
+        selectedBodyAdmin: action.payload,
+      };
     case DELETE_PRODUCT :
-    return {
-      ...state,
-      deleteProductMessage: action.payload
-    }
+      return {
+        ...state,
+        deleteProductMessage: action.payload,
+      };
+    case UPDATE_PRODUCT :
+      return {
+        ...state,
+        updateProductMessage: action.payload,
+      };
+    case CREATE_PRODUCT :
+      return {
+        ...state,
+        createProductMessage: action.payload
+      }
     default:
       return {
         ...state,

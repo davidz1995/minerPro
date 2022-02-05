@@ -10,12 +10,12 @@ import {
   SET_BALANCE_ADMIN,
   SET_HISTORY_ADMIN,
   SET_ADMIN,
-  SET_VIEW_PRODUCTS_ADMIN,
   DELETE_PRODUCT,
+  UPDATE_PRODUCT,
+  CREATE_PRODUCT,
 } from "./actionTypes";
 
-let API_URL = "http://localhost:4000/api";
-//let API_URL = 'https://minerproserver.herokuapp.com/api'
+const API_URL = process.env.REACT_APP_LOCAL_API;
 
 export const getProducts = () => {
   return async (dispatch) => {
@@ -34,6 +34,50 @@ export const getProducts = () => {
     } catch {
       dispatch({
         type: GET_ALL_PRODUCTS,
+        payload: { message: "Error en petición." },
+      });
+    }
+  };
+};
+
+export const createProduct = (
+  token,
+  name,
+  description,
+  price,
+  thumbnail,
+  numberOfCards
+) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/products`,
+        {
+          name,
+          description,
+          price,
+          thumbnail,
+          numberOfCards,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (
+        response.status !== 404 ||
+        response.status === 201 ||
+        response.status === 200
+      )
+        dispatch({ type: CREATE_PRODUCT, payload: response.data });
+      if (response.status === 404) {
+        let error = [{ name: "No se pudo crear el producto." }];
+        dispatch({ type: CREATE_PRODUCT, payload: error });
+      }
+    } catch {
+      dispatch({
+        type: UPDATE_PRODUCT,
         payload: { message: "Error en petición." },
       });
     }
@@ -61,6 +105,51 @@ export const deleteProduct = (id, token) => {
     } catch {
       dispatch({
         type: DELETE_PRODUCT,
+        payload: { message: "Error en petición." },
+      });
+    }
+  };
+};
+
+export const updateProduct = (
+  token,
+  id,
+  name,
+  description,
+  price,
+  thumbnail,
+  numberOfCards
+) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `${API_URL}/products/${id}`,
+        {
+          name,
+          description,
+          price,
+          thumbnail,
+          numberOfCards,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (
+        response.status !== 404 ||
+        response.status === 201 ||
+        response.status === 200
+      )
+        dispatch({ type: UPDATE_PRODUCT, payload: response.data });
+      if (response.status === 404) {
+        let error = [{ name: "No se pudo actualizar el producto." }];
+        dispatch({ type: UPDATE_PRODUCT, payload: error });
+      }
+    } catch {
+      dispatch({
+        type: UPDATE_PRODUCT,
         payload: { message: "Error en petición." },
       });
     }
@@ -106,12 +195,6 @@ export const setHistoryAdmin = () => {
 export const setAdmin = () => {
   return async (dispatch) => {
     dispatch({ type: SET_ADMIN, payload: "admin" });
-  };
-};
-
-export const setViewProductsAdmin = () => {
-  return async (dispatch) => {
-    dispatch({ type: SET_VIEW_PRODUCTS_ADMIN, payload: "viewProductsAdmin" });
   };
 };
 

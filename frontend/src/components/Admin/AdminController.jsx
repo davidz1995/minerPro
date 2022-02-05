@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Products from "./Products";
-import { setViewProductsAdmin } from "../../redux/actions/actions";
 
 const AdminController = () => {
-  const dispatch = useDispatch();
-  const [show, setShow] = useState(true);
 
-  const state = useSelector((state) => state.selectedAdminController);
+  const [show, setShow] = useState(true);
+  const [state, setState] = useState('dashboard')
+
+  //const state = useSelector((state) => state.selectedAdminController);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,8 +23,8 @@ const AdminController = () => {
           <Offcanvas.Title>MinerPro Admin</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <button onClick={() => dispatch(setViewProductsAdmin())}>
-            opcion
+          <button onClick={() => setState('viewProductsAdmin')}>
+            Productos
           </button>
         </Offcanvas.Body>
       </Offcanvas>

@@ -3,16 +3,16 @@ import { useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../../styles/formProducts.css";
-import { updateProduct } from "../../redux/actions/actions";
+import { createProduct } from "../../redux/actions/actions";
 
-const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
+const FormCreateProduct = ({ token, showCreateForm, setShowCreateForm }) => {
   const dispatch = useDispatch();
   const [productData, setProductData] = useState({
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    thumbnail: product.thumbnail,
-    numberOfCards: product.numberOfCards,
+    name: '',
+    description: '',
+    price: '',
+    thumbnail: '',
+    numberOfCards: '',
   });
   const handleChange = (event, name) => {
     setProductData({
@@ -24,9 +24,8 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      updateProduct(
+      createProduct(
         token,
-        product._id,
         productData.name,
         productData.description,
         productData.price,
@@ -34,13 +33,13 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
         productData.numberOfCards
       )
     );
-    setShowEditForm(false);
+    setShowCreateForm(false);
   };
 
   return (
     <div className="standard_form_container">
       <button
-        onClick={() => setShowEditForm(false)}
+        onClick={() => setShowCreateForm(false)}
         style={{
           position: "fixed",
           top: 0,
@@ -63,7 +62,7 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
             name="name"
             value={productData.name}
             type="text"
-            placeholder="Ingresa el nombre"
+            placeholder="Ingresa el nombre del producto ..."
             onChange={(event) => handleChange(event, "name")}
           />
         </Form.Group>
@@ -74,7 +73,7 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
             name="description"
             value={productData.description}
             type="text"
-            placeholder="Descripción"
+            placeholder="Descripción ..."
             onChange={(event) => handleChange(event, "description")}
           />
         </Form.Group>
@@ -85,7 +84,7 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
             name="price"
             value={productData.price}
             type="text"
-            placeholder="Precio"
+            placeholder="Precio ..."
             onChange={(event) => handleChange(event, "price")}
           />
         </Form.Group>
@@ -93,10 +92,10 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
         <Form.Group className="mb-3" controlId="formBasicImage">
           <Form.Label className="label_form">Imágen</Form.Label>
           <Form.Control
-            name="image"
+            name="thumbnail"
             value={productData.thumbnail}
             type="text"
-            placeholder="Imágen"
+            placeholder="URL de imágen ..."
             onChange={(event) => handleChange(event, "thumbnail")}
           />
         </Form.Group>
@@ -124,4 +123,4 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
   );
 };
 
-export default FormEditProduct;
+export default FormCreateProduct;
