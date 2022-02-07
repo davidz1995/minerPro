@@ -1,0 +1,14 @@
+.dark_mode:hover{
+    cursor: pointer;
+    color:rgb(53, 228, 175) !important;
+}
+
+.edit_icon:hover{
+    cursor: pointer;
+    color:rgb(0, 110, 255) !important;
+}
+
+.delete_icon:hover{
+    cursor: pointer;
+    color:rgb(241, 14, 14) !important;
+}

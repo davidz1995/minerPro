@@ -5,14 +5,18 @@ import Button from "react-bootstrap/Button";
 import "../../styles/formProducts.css";
 import { createProduct } from "../../redux/actions/actions";
 
-const FormCreateProduct = ({ token, showCreateForm, setShowCreateForm }) => {
+const FormCreateProduct = ({
+  token,
+  setShowCreateForm,
+  setShowMessageCreate,
+}) => {
   const dispatch = useDispatch();
   const [productData, setProductData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    thumbnail: '',
-    numberOfCards: '',
+    name: "",
+    description: "",
+    price: 0,
+    thumbnail: "",
+    numberOfCards: 0,
   });
   const handleChange = (event, name) => {
     setProductData({
@@ -34,6 +38,7 @@ const FormCreateProduct = ({ token, showCreateForm, setShowCreateForm }) => {
       )
     );
     setShowCreateForm(false);
+    setShowMessageCreate(true);
   };
 
   return (
@@ -101,9 +106,7 @@ const FormCreateProduct = ({ token, showCreateForm, setShowCreateForm }) => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label className="label_form">
-            Cantidad de tarjetas
-          </Form.Label>
+          <Form.Label className="label_form">Cantidad de tarjetas</Form.Label>
           <Form.Select
             name="numberOfCards"
             onChange={(event) => handleChange(event, "numberOfCards")}
@@ -114,10 +117,15 @@ const FormCreateProduct = ({ token, showCreateForm, setShowCreateForm }) => {
             <option>6</option>
           </Form.Select>
         </Form.Group>
-
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
+        {productData.name.length &&
+          productData.description.length &&
+          productData.price > 0 &&
+          productData.thumbnail.length &&
+          productData.numberOfCards > 0 && (
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          )}
       </Form>
     </div>
   );

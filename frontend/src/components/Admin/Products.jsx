@@ -24,17 +24,29 @@ function Products() {
   const [showAlert, setShowAlert] = useState(false);
   const [product, setProduct] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showMessageCreate, setShowMessageCreate] = useState(true);
+  const [showMessageUpdate, setShowMessageUpdate] = useState(true);
+  const [showMessageDelete, setShowMessageDelete] = useState(true);
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
   const products = useSelector((state) => state.products);
+  const messageCreate = useSelector(
+    (state) => state.createProductMessage.message
+  );
+  const messageUpdate = useSelector(
+    (state) => state.updateProductMessage.message
+  );
+  const messageDelete = useSelector(
+    (state) => state.deleteProductMessage.message
+  );
 
   return (
     <div>
       {showAlert && (
-        <div className="container_delete_alert">
+        <div className="container_alert">
           <h4>Seguro quieres eliminar el producto?</h4>
           <div>
             <Button variant="outlined" onClick={() => setShowAlert(false)}>
@@ -46,10 +58,59 @@ function Products() {
               onClick={() => {
                 dispatch(deleteProduct(product, token));
                 setShowAlert(false);
+                setShowMessageDelete(true);
               }}
               style={{ marginLeft: "1em" }}
             >
               Eliminar
+            </Button>
+          </div>
+        </div>
+      )}
+      {messageCreate && showMessageCreate && (
+        <div className="container_alert">
+          <h4>{messageCreate}</h4>
+          <div>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setShowMessageCreate(false);
+                dispatch(getProducts());
+              }}
+            >
+              Aceptar
+            </Button>
+          </div>
+        </div>
+      )}
+      {messageUpdate && showMessageUpdate && (
+        <div className="container_alert">
+          <h4>{messageUpdate}</h4>
+          <div>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setShowMessageUpdate(false);
+                dispatch(getProducts());
+              }}
+            >
+              Aceptar
+            </Button>
+          </div>
+        </div>
+      )}
+      {messageDelete && showMessageDelete && (
+        <div className="container_alert">
+          <h4>{messageDelete}</h4>
+          <div>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setShowMessageDelete(false);
+                dispatch(getProducts());
+              }}
+            >
+              Aceptar
             </Button>
           </div>
         </div>
@@ -66,8 +127,8 @@ function Products() {
           <FormEditProduct
             product={selectedProduct}
             token={token}
-            showEditForm={showEditForm}
             setShowEditForm={setShowEditForm}
+            setShowMessageUpdate={setShowMessageUpdate}
           />
         </div>
       )}
@@ -82,11 +143,12 @@ function Products() {
         >
           <FormCreateProduct
             token={token}
-            showCreateForm={showCreateForm}
             setShowCreateForm={setShowCreateForm}
+            setShowMessageCreate={setShowMessageCreate}
           />
         </div>
       )}
+
       <div>
         <Button
           variant="contained"

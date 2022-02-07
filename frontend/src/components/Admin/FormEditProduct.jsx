@@ -5,7 +5,12 @@ import Button from "react-bootstrap/Button";
 import "../../styles/formProducts.css";
 import { updateProduct } from "../../redux/actions/actions";
 
-const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
+const FormEditProduct = ({
+  product,
+  token,
+  setShowEditForm,
+  setShowMessageUpdate,
+}) => {
   const dispatch = useDispatch();
   const [productData, setProductData] = useState({
     name: product.name,
@@ -35,6 +40,7 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
       )
     );
     setShowEditForm(false);
+    setShowMessageUpdate(true);
   };
 
   return (
@@ -102,9 +108,7 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label className="label_form">
-            Cantidad de tarjetas
-          </Form.Label>
+          <Form.Label className="label_form">Cantidad de tarjetas</Form.Label>
           <Form.Select
             name="numberOfCards"
             onChange={(event) => handleChange(event, "numberOfCards")}
@@ -115,10 +119,11 @@ const FormEditProduct = ({ product, token, showEditForm, setShowEditForm }) => {
             <option>6</option>
           </Form.Select>
         </Form.Group>
-
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
+        {productData.numberOfCards.length && (
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Editar
+          </Button>
+        )}
       </Form>
     </div>
   );

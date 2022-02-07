@@ -51,7 +51,7 @@ router.post(`/`, async (req, res) => {
 
   product = await product.save();
   !product
-    ? res.status(500).send("Product not created")
+    ? res.status(500).send({message: "No se pudo crear el producto"})
     : res.status(200).send({ message: "Producto creado", product });
 });
 

@@ -1,6 +1,7 @@
 const { User } = require("../db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 
 class UserModel {
   constructor(model) {
@@ -78,9 +79,27 @@ class UserModel {
       .catch((error) => next(error));
   };
 
+  getByName = async (req, res, next) => {
+    const name = req.params.name;
+    return await this.model
+      .findAll({
+        where: {
+          name: {[Op.iLike]:`%${name}%`},
+        },
+      })
+      .then((response) => {
+        if(response.length){
+          res.status(200).send(response);
+        } else {
+          res.status(404).send(response)
+        }
+      })
+      .catch((error) => next(error));
+  };
+
   updateById = async (req, res) => {
     const id = req.params.id;
-    const { name, lastName, email, password, isAdmin } = req.body;
+    const { name, lastName, email, isAdmin } = req.body;
     let error;
     let searchedElement = await this.model
       .findOne({
@@ -97,7 +116,6 @@ class UserModel {
           name,
           lastName,
           email,
-          password: bcrypt.hashSync(password, 10),
           isAdmin,
         },
         { where: { id } }
