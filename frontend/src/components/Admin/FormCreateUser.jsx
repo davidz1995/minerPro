@@ -14,6 +14,7 @@ const FormCreateUser = ({ token, setShowCreateForm, setShowMessageCreate }) => {
     password: "",
     isAdmin: "",
     wallet: "",
+    housing_fee: "",
   });
   const handleChange = (event, name) => {
     setUserData({
@@ -32,7 +33,8 @@ const FormCreateUser = ({ token, setShowCreateForm, setShowMessageCreate }) => {
         userData.email,
         userData.password,
         userData.isAdmin,
-        userData.wallet
+        userData.wallet,
+        userData.housing_fee
       )
     );
     setShowCreateForm(false);
@@ -95,6 +97,17 @@ const FormCreateUser = ({ token, setShowCreateForm, setShowMessageCreate }) => {
               onChange={(event) => handleChange(event, "email")}
             />
           </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicImage">
+            <Form.Label className="label_form">Housing Fee</Form.Label>
+            <Form.Control
+              name="housing_fee"
+              value={userData.housing_fee}
+              type="text"
+              placeholder="Housing fee ..."
+              onChange={(event) => handleChange(event, "housing_fee")}
+            />
+          </Form.Group>
         </div>
         <div>
           <Form.Group className="mb-3" controlId="formBasicImage">
@@ -130,17 +143,19 @@ const FormCreateUser = ({ token, setShowCreateForm, setShowMessageCreate }) => {
               onChange={(event) => handleChange(event, "wallet")}
             />
           </Form.Group>
+
           {userData.name.length &&
             userData.lastName.length &&
             userData.email.length &&
             userData.password.length &&
             userData.isAdmin.length &&
-            userData.wallet.length && (
+            userData.wallet.length && 
+            userData.housing_fee.length && (
               <Button
                 variant="primary"
                 type="submit"
                 onClick={handleSubmit}
-                style={{ float: "right" }}
+                style={{ width:'17em', marginTop:'2em'}}
               >
                 Crear
               </Button>

@@ -6,33 +6,25 @@ import Spinner from "react-bootstrap/Spinner";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import "../../styles/users.css";
 import {
   deleteUser,
   getUsers,
-  cleanCreateMessage,
   cleanUpdateMessage,
   cleanDeleteMessage,
 } from "../../redux/actions/actions";
-import FormCreateUser from "./FormCreateUser";
 import FormEditUser from "./FormEditUser";
 import SearchUsers from "./SearchUsers";
 import { Link } from "react-router-dom";
-import UserDetail from "./UserDetail";
 
 function UserTable() {
   const [darkMode, setDarkMode] = useState("light");
   const [user, setUser] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const [showCreateForm, setShowCreateForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
-  const [showMessageCreate, setShowMessageCreate] = useState(true);
   const [showMessageDelete, setShowMessageDelete] = useState(true);
   const [showMessageUpdate, setShowMessageUpdate] = useState(true);
-  const [showUserDetail, setShowUserDetail] = useState(false);
   const dispatch = useDispatch();
   let users = useSelector((state) =>
     state.users.sort((a, b) => {
@@ -51,7 +43,6 @@ function UserTable() {
     dispatch(getUsers(token));
   }, [dispatch, token]);
 
-  const messageCreate = useSelector((state) => state.createUserMessage.message);
   const messageDelete = useSelector((state) => state.deleteUserMessage.message);
   const messageUpdate = useSelector((state) => state.updateUserMessage.message);
 
@@ -63,14 +54,16 @@ function UserTable() {
         height: "max-content",
         minHeight: "100vh",
         paddingBottom: "5em",
+        marginBottom: "-30px",
+        paddingTop: "4em",
       }}
     >
-      {showCreateForm && (
-        <FormCreateUser
-          setShowCreateForm={setShowCreateForm}
-          setShowMessageCreate={setShowMessageCreate}
-        />
-      )}
+      <Link
+        to="/panelAdmin"
+        style={{ position: "absolute", color: "white", top: '0', left:'0' }}
+      >
+        Volver a panel
+      </Link>
 
       {showEditForm && (
         <div
@@ -115,24 +108,6 @@ function UserTable() {
         </div>
       )}
 
-      {messageCreate && showMessageCreate && (
-        <div className="container_alert">
-          <h4>{messageCreate}</h4>
-          <div>
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                setShowMessageCreate(false);
-                dispatch(cleanCreateMessage());
-                dispatch(getUsers(token));
-              }}
-            >
-              Aceptar
-            </Button>
-          </div>
-        </div>
-      )}
-
       {messageUpdate && showMessageUpdate && (
         <div className="container_alert">
           <h4>{messageUpdate}</h4>
@@ -169,28 +144,9 @@ function UserTable() {
         </div>
       )}
 
-      {showUserDetail ? (
-        <UserDetail
-          setShowUserDetail={setShowUserDetail}
-          wallet={selectedUser.wallet}
-          fee={selectedUser.housing_fee}
-        />
-      ) : null}
+      <h1 style={{color:'white', marginBottom:'1em'}}>Lista de usuarios completa</h1>
 
       <SearchUsers />
-
-      <Button
-        style={{
-          backgroundColor: "rgb(53, 228, 175)",
-          float: "left",
-          marginBottom: "1em",
-          borderStyle: "none",
-          fontWeight: "bolder",
-        }}
-        onClick={() => setShowCreateForm(true)}
-      >
-        Crear usuario
-      </Button>
 
       <DarkModeIcon
         className="dark_mode"
@@ -205,86 +161,55 @@ function UserTable() {
         }
       />
 
-      <RefreshIcon
-        className="dark_mode"
-        style={{
-          color: "white",
-          float: "right",
-          marginTop: ".25em",
-          marginRight: "1em",
-        }}
-        onClick={() => {
-          dispatch(getUsers(token));
-        }}
-      />
       {users.length ? (
-        <>
-          <Table bordered hover variant={darkMode}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Wallet</th>
-                <th>Fee</th>
-                <th>Status</th>
-                <th>isAdmin</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.slice(0, 10).map((user) => {
-                return (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>
-                      {user.name} {user.lastName}
-                    </td>
-                    <td>{user.email}</td>
-                    <td>{user.wallet}</td>
-                    <td>{user.housing_fee}</td>
-                    <td>{user.status}</td>
-                    <td>{JSON.stringify(user.isAdmin)}</td>
-                    <td
-                      style={{
-                        display: "flex",
-                        padding: "2em 1em 2em 1em",
-                        minHeight: "8em",
+        <Table bordered hover variant={darkMode}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Wallet</th>
+              <th>Fee</th>
+              <th>Status</th>
+              <th>isAdmin</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => {
+              return (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>
+                    {user.name} {user.lastName}
+                  </td>
+                  <td>{user.email}</td>
+                  <td>{user.wallet}</td>
+                  <td>{user.housing_fee}</td>
+                  <td>{user.status}</td>
+                  <td>{JSON.stringify(user.isAdmin)}</td>
+                  <td style={{ display: "flex", padding: "2em 1em 2em 1em" }}>
+                    <EditIcon
+                      className="edit_icon"
+                      style={{ marginRight: "1em" }}
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setShowEditForm(true);
                       }}
-                    >
-                      <EditIcon
-                        className="edit_icon"
-                        style={{ marginRight: "1em" }}
-                        onClick={() => {
-                          setSelectedUser(user);
-                          setShowEditForm(true);
-                        }}
-                      />
-                      <ReadMoreIcon
-                        className="edit_icon"
-                        style={{ marginRight: "1em" }}
-                        onClick={() => {
-                          setSelectedUser(user);
-                          setShowUserDetail(true);
-                        }}
-                      />
-                      <DeleteIcon
-                        className="delete_icon"
-                        onClick={() => {
-                          setUser(user.id);
-                          setShowAlert(true);
-                        }}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-          <Link to="/fullUsersList" style={{ color: "white" }}>
-            Ver lista completa
-          </Link>
-        </>
+                    />
+                    <DeleteIcon
+                      className="delete_icon"
+                      onClick={() => {
+                        setUser(user.id);
+                        setShowAlert(true);
+                      }}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       ) : (
         <div style={{ paddingTop: "9em", height: "100vh" }}>
           <Spinner animation="border" variant="light" role="status"></Spinner>

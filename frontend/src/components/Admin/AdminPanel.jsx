@@ -5,18 +5,22 @@ import Login from "../Login";
 import BodyAdmin from "./BodyAdmin"
 
 const AdminPanel = () => {
-  const userData = JSON.parse(sessionStorage.getItem("minerProAdmin"));
+  const userData = JSON.parse(sessionStorage.getItem("clientData"));
+  const forceNewPassword = () => {
+    window.location.href = "/change-password";
+  };
+  
   return (
     <div style={{ marginBottom: "-30px", minHeight: "100vh" }}>
-      {userData ? (
+      {userData && userData.status === "Active" && (
         <>
           <AdminNavBar name={userData.name} />
           <PageSelector />
           <BodyAdmin />
         </>
-      ) : (
-        <Login />
       )}
+      {userData && userData.status === "Pending" && forceNewPassword()}
+      {!userData && <Login />}
     </div>
   );
 };

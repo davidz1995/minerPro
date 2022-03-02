@@ -8,6 +8,12 @@ import Products from "./components/Products";
 import Login from "./components/Login";
 import ClientPanel from "./components/Client/ClientPanel";
 import AdminPanel from "./components/Admin/AdminPanel";
+import ChangePassword from "./components/ChangePassword";
+import Suspended from "./components/Suspended";
+import FullUsersList from "./components/Admin/FullUsersList"
+import FullMinersList from "./components/Admin/FullMinersList"
+import FullPayoutList from "./components/Admin/FullPayoutList"
+
 
 function App() {
   return (
@@ -21,10 +27,15 @@ function App() {
             <Route exact path="/faq" element={<Faq />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/change-password" element={<ChangePassword />} />
             {/* Admin */}
             <Route exact path="/panelAdmin" element={<AdminPanel />} />
+            <Route exact path="/fullUsersList" element={<FullUsersList />} />
+            <Route exact path="/fullMinersList" element={<FullMinersList />} />
+            <Route exact path="/fullPaymentList" element={<FullPayoutList />} />
             {/* Client */}
             <Route exact path="/panelClient" element={<ClientPanel />} />
+            <Route exact path="/suspended" element={<Suspended />} />
           </Routes>
         </div>
       </Router>

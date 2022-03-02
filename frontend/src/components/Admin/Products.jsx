@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProduct, getProducts } from "../../redux/actions/actions";
+import { cleanCreateMessageProducts, cleanDeleteMessageProducts, cleanUpdateMessageProducts, deleteProduct, getProducts } from "../../redux/actions/actions";
 import Spinner from "react-bootstrap/esm/Spinner";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/esm/Col";
@@ -75,6 +75,7 @@ function Products() {
               variant="outlined"
               onClick={() => {
                 setShowMessageCreate(false);
+                dispatch(cleanCreateMessageProducts());
                 dispatch(getProducts());
               }}
             >
@@ -91,6 +92,7 @@ function Products() {
               variant="outlined"
               onClick={() => {
                 setShowMessageUpdate(false);
+                dispatch(cleanUpdateMessageProducts());
                 dispatch(getProducts());
               }}
             >
@@ -107,6 +109,7 @@ function Products() {
               variant="outlined"
               onClick={() => {
                 setShowMessageDelete(false);
+                dispatch(cleanDeleteMessageProducts());
                 dispatch(getProducts());
               }}
             >

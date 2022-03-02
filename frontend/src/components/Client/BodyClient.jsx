@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Mineros from "./Mineros";
 import Balance from "./Balance";
+import History from "./History";
 
 const BodyClient = ({wallet}) => {
   const state = useSelector((state) => state.selectedBodyClient);
@@ -9,7 +10,7 @@ const BodyClient = ({wallet}) => {
     <div>
       {state === "mineros" && <Mineros wallet={wallet}/>}
       {state === "balance" && <Balance wallet={wallet}/>}
-      {state === "historial" && <p>historial</p>}
+      {state === "historial" && <History/>}
     </div>
   );
 };

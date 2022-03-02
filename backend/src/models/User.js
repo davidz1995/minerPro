@@ -27,10 +27,20 @@ module.exports = (sequelize) => {
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false
     },
     wallet: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    housing_fee: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Pending"
+    }
   });
 };

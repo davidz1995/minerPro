@@ -1,3 +1,11 @@
 .button_selector:hover{
     background-color: rgb(53, 228, 175) !important;
 }
+@media (max-width: 700px) {
+    .button_selector{
+        width: 5em !important;
+    }
+    .button_group{
+        height: 3em !important;
+    }
+}

@@ -1,59 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
-import "../../styles/users.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import FormCreateMiner from "./FormCreateMiner";
+import FormEditMiner from "./FormEditMiner";
 import {
-  deleteUser,
-  getUsers,
-  cleanCreateMessage,
-  cleanUpdateMessage,
-  cleanDeleteMessage,
+  cleanCreateMessageMiners,
+  getMiners,
+  deleteMiner,
+  cleanDeleteMessageMiners,
+  cleanUpdateMessageMiners
 } from "../../redux/actions/actions";
-import FormCreateUser from "./FormCreateUser";
-import FormEditUser from "./FormEditUser";
-import SearchUsers from "./SearchUsers";
 import { Link } from "react-router-dom";
-import UserDetail from "./UserDetail";
 
-function UserTable() {
+const MinersTable = () => {
+  const dispatch = useDispatch();
+  const token = JSON.parse(localStorage.getItem("minerProAdminToken"));
   const [darkMode, setDarkMode] = useState("light");
-  const [user, setUser] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [selectedUser, setSelectedUser] = useState("");
   const [showMessageCreate, setShowMessageCreate] = useState(true);
   const [showMessageDelete, setShowMessageDelete] = useState(true);
   const [showMessageUpdate, setShowMessageUpdate] = useState(true);
-  const [showUserDetail, setShowUserDetail] = useState(false);
-  const dispatch = useDispatch();
-  let users = useSelector((state) =>
-    state.users.sort((a, b) => {
-      if (a.name.toLowerCase() < b.name.toLowerCase()) {
-        return -1;
-      } else if (b.name.toLowerCase() > a.name.toLowerCase()) {
-        return 1;
-      } else {
-        return 0;
-      }
-    })
-  );
-  const token = JSON.parse(localStorage.getItem("minerProAdminToken"));
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [selectedMiner, setSelectedMiner] = useState("");
+  const [miner, setMiner] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    dispatch(getUsers(token));
+    dispatch(getMiners(token));
   }, [dispatch, token]);
 
-  const messageCreate = useSelector((state) => state.createUserMessage.message);
-  const messageDelete = useSelector((state) => state.deleteUserMessage.message);
-  const messageUpdate = useSelector((state) => state.updateUserMessage.message);
+  const miners = useSelector((state) => state.miners.reverse());
+  const messageCreate = useSelector(
+    (state) => state.createMinerMessage.message
+  );
+  const messageDelete = useSelector(
+    (state) => state.deleteMinerMessage.message
+  );
+  const messageUpdate = useSelector((state) => state.updateMinerMessage.message);
+
+  const usersList = useSelector((state) => state.users);
+
+  const userName = (userId) => {
+    const userName = usersList.filter((user) => user.id === userId);
+    const completeName = userName.length
+      ? `${userName[0].name} ${userName[0].lastName}`
+      : "No se encontró el nombre.";
+    return completeName;
+  };
 
   return (
     <div
@@ -66,7 +64,7 @@ function UserTable() {
       }}
     >
       {showCreateForm && (
-        <FormCreateUser
+        <FormCreateMiner
           setShowCreateForm={setShowCreateForm}
           setShowMessageCreate={setShowMessageCreate}
         />
@@ -81,8 +79,8 @@ function UserTable() {
             alignItems: "center",
           }}
         >
-          <FormEditUser
-            user={selectedUser}
+          <FormEditMiner
+            miner={selectedMiner}
             token={token}
             setShowEditForm={setShowEditForm}
             setShowMessageUpdate={setShowMessageUpdate}
@@ -92,7 +90,7 @@ function UserTable() {
 
       {showAlert && (
         <div className="container_alert">
-          <h4>Seguro quieres eliminar a este usuario?</h4>
+          <h4>Seguro quieres eliminar este minero?</h4>
           <div>
             <Button
               variant="outline-primary"
@@ -103,7 +101,7 @@ function UserTable() {
             <Button
               variant="outline-danger"
               onClick={() => {
-                dispatch(deleteUser(user, token));
+                dispatch(deleteMiner(miner, token));
                 setShowAlert(false);
                 setShowMessageDelete(true);
               }}
@@ -123,8 +121,8 @@ function UserTable() {
               variant="outline-primary"
               onClick={() => {
                 setShowMessageCreate(false);
-                dispatch(cleanCreateMessage());
-                dispatch(getUsers(token));
+                dispatch(cleanCreateMessageMiners());
+                dispatch(getMiners(token));
               }}
             >
               Aceptar
@@ -141,8 +139,8 @@ function UserTable() {
               variant="outline-primary"
               onClick={() => {
                 setShowMessageUpdate(false);
-                dispatch(cleanUpdateMessage());
-                dispatch(getUsers(token));
+                dispatch(cleanUpdateMessageMiners());
+                dispatch(getMiners(token));
               }}
             >
               Aceptar
@@ -159,8 +157,8 @@ function UserTable() {
               variant="outline-primary"
               onClick={() => {
                 setShowMessageDelete(false);
-                dispatch(cleanDeleteMessage());
-                dispatch(getUsers(token));
+                dispatch(cleanDeleteMessageMiners());
+                dispatch(getMiners(token));
               }}
             >
               Aceptar
@@ -168,16 +166,6 @@ function UserTable() {
           </div>
         </div>
       )}
-
-      {showUserDetail ? (
-        <UserDetail
-          setShowUserDetail={setShowUserDetail}
-          wallet={selectedUser.wallet}
-          fee={selectedUser.housing_fee}
-        />
-      ) : null}
-
-      <SearchUsers />
 
       <Button
         style={{
@@ -189,7 +177,7 @@ function UserTable() {
         }}
         onClick={() => setShowCreateForm(true)}
       >
-        Crear usuario
+        Nuevo minero
       </Button>
 
       <DarkModeIcon
@@ -214,84 +202,66 @@ function UserTable() {
           marginRight: "1em",
         }}
         onClick={() => {
-          dispatch(getUsers(token));
+          dispatch(getMiners(token));
         }}
       />
-      {users.length ? (
-        <>
-          <Table bordered hover variant={darkMode}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Wallet</th>
-                <th>Fee</th>
-                <th>Status</th>
-                <th>isAdmin</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.slice(0, 10).map((user) => {
+
+      <Table striped bordered hover variant={darkMode}>
+        <thead>
+          <tr>
+            <th>Propietario</th>
+            <th>Nombre</th>
+            <th>Placas</th>
+            <th>Id Simplemining</th>
+            <th>Usuario Simplemining</th>
+            <th>Contraseña Simplemining</th>
+            <th style={{ width: "10em" }}></th>
+          </tr>
+        </thead>
+        <tbody>
+          {miners.length
+            ? miners.slice(0, 10).map((miner) => {
                 return (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>
-                      {user.name} {user.lastName}
-                    </td>
-                    <td>{user.email}</td>
-                    <td>{user.wallet}</td>
-                    <td>{user.housing_fee}</td>
-                    <td>{user.status}</td>
-                    <td>{JSON.stringify(user.isAdmin)}</td>
+                  <tr key={miner.id}>
+                    <td>{userName(miner.userId)}</td>
+                    <td>{miner.name}</td>
+                    <td>{miner.placas}</td>
+                    <td>{miner.id_simplemining}</td>
+                    <td>{miner.user_simplemining}</td>
+                    <td>{miner.pass_simplemining}</td>
                     <td
                       style={{
                         display: "flex",
                         padding: "2em 1em 2em 1em",
-                        minHeight: "8em",
+                        width: "10em",
+                        justifyContent: "center",
                       }}
                     >
                       <EditIcon
                         className="edit_icon"
                         style={{ marginRight: "1em" }}
                         onClick={() => {
-                          setSelectedUser(user);
+                          setSelectedMiner(miner);
                           setShowEditForm(true);
-                        }}
-                      />
-                      <ReadMoreIcon
-                        className="edit_icon"
-                        style={{ marginRight: "1em" }}
-                        onClick={() => {
-                          setSelectedUser(user);
-                          setShowUserDetail(true);
                         }}
                       />
                       <DeleteIcon
                         className="delete_icon"
                         onClick={() => {
-                          setUser(user.id);
+                          setMiner(miner.id);
                           setShowAlert(true);
                         }}
                       />
                     </td>
                   </tr>
                 );
-              })}
-            </tbody>
-          </Table>
-          <Link to="/fullUsersList" style={{ color: "white" }}>
-            Ver lista completa
-          </Link>
-        </>
-      ) : (
-        <div style={{ paddingTop: "9em", height: "100vh" }}>
-          <Spinner animation="border" variant="light" role="status"></Spinner>
-        </div>
-      )}
+              })
+            : null}
+        </tbody>
+      </Table>
+      <Link to='/fullMinersList' style={{color:'white'}}>Ver lista completa</Link>
     </div>
   );
-}
+};
 
-export default UserTable;
+export default MinersTable;

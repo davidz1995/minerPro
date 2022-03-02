@@ -13,14 +13,31 @@ import {
   UPDATE_PRODUCT,
   CREATE_PRODUCT,
   GET_USERS,
+  GET_USER_BY_ID,
+  GET_HISTORIES,
   CREATE_USER,
   UPDATE_USER,
   DELETE_USER,
+  CREATE_PAYMENT,
+  DELETE_PAYMENT,
   GET_USER_BY_NAME,
   CLEAN_MESSAGE_CREATE,
   CLEAN_MESSAGE_UPDATE,
   CLEAN_MESSAGE_DELETE,
   CLEAN_SEARCHED_USERS,
+  GET_ETHERMINE_MINER_POOLSTATS,
+  CLEAN_MESSAGE_CREATE_PRODUCTS,
+  CLEAN_MESSAGE_UPDATE_PRODUCTS,
+  CLEAN_MESSAGE_DELETE_PRODUCTS,
+  CLEAN_MESSAGE_CREATE_PAYMENTS,
+  CLEAN_MESSAGE_DELETE_PAYMENTS,
+  GET_MINERS,
+  CREATE_MINER,
+  UPDATE_MINER,
+  DELETE_MINER,
+  CLEAN_MESSAGE_CREATE_MINERS,
+  CLEAN_MESSAGE_DELETE_MINERS,
+  CLEAN_MESSAGE_UPDATE_MINERS,
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -28,15 +45,25 @@ const initialState = {
   selectedBodyClient: "mineros",
   selectedBodyAdmin: "dashboard",
   ethermineData: {},
+  ethermineMinerCurrentStats: {},
   etherminePoolStats: {},
   deleteProductMessage: "",
   updateProductMessage: "",
   createProductMessage: "",
   users: [],
+  userById: [],
+  histories: [],
+  miners: [],
   userByName: [],
   createUserMessage: "",
   updateUserMessage: "",
   deleteUserMessage: "",
+  createPaymentMessage: "",
+  updatePaymentMessage: "",
+  deletePaymentMessage: "",
+  createMinerMessage: "",
+  updateMinerMessage: "",
+  deleteMinerMessage: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -65,6 +92,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ethermineData: action.payload,
+      };
+    case GET_ETHERMINE_MINER_POOLSTATS:
+      return {
+        ...state,
+        ethermineMinerCurrentStats: action.payload,
       };
     case GET_ETHERMINE_POOLSTATS:
       return {
@@ -111,6 +143,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         users: action.payload,
       };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        userById: action.payload,
+      };
+    case GET_HISTORIES:
+      return {
+        ...state,
+        histories: action.payload,
+      };
     case CREATE_USER:
       return {
         ...state,
@@ -150,6 +192,76 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userByName: action.payload,
+      };
+    case CLEAN_MESSAGE_CREATE_PRODUCTS:
+      return {
+        ...state,
+        createProductMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_UPDATE_PRODUCTS:
+      return {
+        ...state,
+        updateProductMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_DELETE_PRODUCTS:
+      return {
+        ...state,
+        deleteProductMessage: action.payload,
+      };
+    case CREATE_PAYMENT:
+      return {
+        ...state,
+        createPaymentMessage: action.payload,
+      };
+    case DELETE_PAYMENT:
+      return {
+        ...state,
+        deletePaymentMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_CREATE_PAYMENTS:
+      return {
+        ...state,
+        createPaymentMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_DELETE_PAYMENTS:
+      return {
+        ...state,
+        deletePaymentMessage: action.payload,
+      };
+    case GET_MINERS:
+      return {
+        ...state,
+        miners: action.payload,
+      };
+    case CREATE_MINER:
+      return {
+        ...state,
+        createMinerMessage: action.payload,
+      };
+    case UPDATE_MINER:
+      return {
+        ...state,
+        updateMinerMessage: action.payload,
+      };
+    case DELETE_MINER:
+      return {
+        ...state,
+        deleteMinerMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_CREATE_MINERS:
+      return {
+        ...state,
+        createMinerMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_UPDATE_MINERS:
+      return {
+        ...state,
+        updateMinerMessage: action.payload,
+      };
+    case CLEAN_MESSAGE_DELETE_MINERS:
+      return {
+        ...state,
+        deleteMinerMessage: action.payload,
       };
     default:
       return {

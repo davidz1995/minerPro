@@ -8,8 +8,8 @@ import '../../styles/pageSelector.css'
 const PageSelector = () => {
   const dispatch = useDispatch();
   return (
-    <div style={{marginTop:'2em', marginBottom:'2em'}}>
-      <ButtonGroup aria-label="Basic example" style={{ height: "5em" }}>
+    <div className="page_selector" style={{marginTop:'2em', marginBottom:'2em'}}>
+      <ButtonGroup aria-label="Basic example" style={{ height: "5em" }} className='button_group'>
         <Button
           className='button_selector'
           variant="secondary"

@@ -2,3 +2,18 @@
     cursor: pointer;
     transform: rotate(100deg);
 }
+@media (max-width: 700px) {
+    .eth_usd{
+        font-size: 1.3rem !important;
+    }
+    .change-icon{
+        margin-left: .5em !important;
+        margin-top: 5px !important;
+    }
+    .refresh_icon{
+        display: none !important;
+    }
+    .container_balance{
+       height: 100vh;
+    }
+}

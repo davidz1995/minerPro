@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import logo from "../assets/images/logoCompletoMinerPro.png";
 import ClientPanel from "../components/Client/ClientPanel";
 import { Link } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import "../styles/login.css";
 
 const Login = () => {
   const clientData = sessionStorage.getItem("clientData");
+  const [show, setShow] = useState("password");
+  const [buttonMessage, setButtonMessage] = useState("Entrar");
 
   const handleSubmit = (values) => {
-
-    const API_URL = process.env.REACT_APP_LOCAL_API
-
+    const API_URL = process.env.REACT_APP_LOCAL_API;
+    setButtonMessage('Cargando ...')
     axios
       .post(`${API_URL}/users/login`, {
         email: values.email,
@@ -23,26 +26,23 @@ const Login = () => {
         let { userData, isAdmin, token } = response.data; //eslint-disable-line
         if (isAdmin) {
           response.status === 200 &&
-            localStorage.setItem(
-              "minerProAdminToken",
-              JSON.stringify(token)
-            );
-            sessionStorage.setItem(
-              "minerProAdmin",
-              JSON.stringify(userData)
-            )
+            localStorage.setItem("minerProAdminToken", JSON.stringify(token));
+          sessionStorage.setItem("clientData", JSON.stringify(userData));
           window.location.href = "/panelAdmin";
         } else {
           sessionStorage.setItem("clientData", JSON.stringify(userData));
           window.location.href = "/panelClient";
         }
       })
-      .catch(() => alert("No existe el usuario."));
+      .catch(() => {
+        setButtonMessage('Esperar')
+        alert('Datos incorrectos.')
+      });
   };
 
   return (
     <>
-      {clientData ? (
+      {clientData && clientData.status === "Active" ? (
         <ClientPanel />
       ) : (
         <div className="login_page">
@@ -54,9 +54,9 @@ const Login = () => {
                 left: 2,
                 padding: "1em",
                 textDecoration: "none",
-                color:'white',
-                fontWeight:'bold',
-                fontSize:'.8rem'
+                color: "white",
+                fontWeight: "bold",
+                fontSize: ".8rem",
               }}
             >
               Volver
@@ -93,18 +93,50 @@ const Login = () => {
                 <label htmlFor="password" className="label_login">
                   Contraseña
                 </label>
-                <Field
-                  className="input_login"
-                  name="password"
-                  type="password"
-                />
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Field
+                    className="input_login"
+                    name="password"
+                    type={show}
+                    style={{ width: "90%" }}
+                  />
+                  {show === "password" ? (
+                    <VisibilityIcon
+                      style={{ marginTop: ".3em" }}
+                      onClick={() => {
+                        show === "password"
+                          ? setShow("text")
+                          : setShow("password");
+                      }}
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      style={{ marginTop: ".3em" }}
+                      onClick={() => {
+                        show === "password"
+                          ? setShow("text")
+                          : setShow("password");
+                      }}
+                    />
+                  )}
+                </div>
                 <ErrorMessage
                   name="password"
                   render={(error) => <p className="error_login">{error}</p>}
                 />
 
-                <button className="login_submit" type="submit">
-                  Entrar
+                {/* <p>
+                  Olvidaste tu contraseña?{" "}
+                  <Link to={"/restore-password"}>Haz click aquí.</Link>{" "}
+                </p> */}
+
+                <button
+                  className="login_submit"
+                  type="submit"
+                >
+                  {buttonMessage}
                 </button>
               </Form>
             </Formik>

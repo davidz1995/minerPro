@@ -72,15 +72,23 @@ const FormCreateProduct = ({
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicDescription">
+        <Form.Group
+          className="mb-3"
+          controlId="formBasicDescription"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "left",
+          }}
+        >
           <Form.Label className="label_form">Descripción</Form.Label>
-          <Form.Control
+          <textarea
             name="description"
+            style={{ height: "5em" }}
             value={productData.description}
-            type="text"
             placeholder="Descripción ..."
             onChange={(event) => handleChange(event, "description")}
-          />
+          ></textarea>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPrice">
@@ -123,7 +131,7 @@ const FormCreateProduct = ({
           productData.thumbnail.length &&
           productData.numberOfCards > 0 && (
             <Button variant="primary" type="submit" onClick={handleSubmit}>
-              Submit
+              Crear producto
             </Button>
           )}
       </Form>

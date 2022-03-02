@@ -61,13 +61,13 @@ const { User, Farm, History, Miner } = sequelize.models;
 
 // Relaciones
 User.hasMany(Miner);
-Miner.belongsTo(User);
+//Miner.belongsTo(User);
 
 User.hasMany(History);
-History.belongsTo(User);
+//History.belongsTo(User);
 
 Farm.hasMany(Miner);
-Miner.belongsTo(Farm);
+//Miner.belongsTo(Farm);
 
 module.exports = {
   ...sequelize.models,

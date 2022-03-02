@@ -2,9 +2,15 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import logo from "../../assets/images/logoCompletoMinerPro.png";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PasswordIcon from "@mui/icons-material/Password";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const ClientNavBar = ({ name }) => {
+  const handleClick = () => {
+    sessionStorage.removeItem("clientData");
+  };
   return (
     <div>
       <Navbar bg="light" variant="white">
@@ -18,16 +24,38 @@ const ClientNavBar = ({ name }) => {
             style={{ fontWeight: "bold" }}
           >
             {name && (
-              <Navbar.Text>
-                <AccountCircleIcon style={{ marginRight: ".5em" }} />
-                {name}
-                <a
-                  href="/login"
-                  style={{ marginLeft: "2em" }}
-                  onClick={() => sessionStorage.removeItem("clientData")}
+              <Navbar.Text style={{ display: "flex" }}>
+                <DropdownButton
+                  align="end"
+                  variant="secondary"
+                  id="dropdown-basic-button"
+                  title={name}
                 >
-                  Cerrar sesión
-                </a>
+                  <Dropdown.Item
+                    href="/change-password"
+                    style={{ padding: "1em", fontWeight: "bold" }}
+                  >
+                    <PasswordIcon style={{ marginRight: ".5em" }} />
+                    Cambiar contraseña
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="/login"
+                    onClick={handleClick}
+                    style={{ color: "red", padding: "1em", fontWeight: "bold" }}
+                  >
+                    <LogoutIcon style={{ marginRight: ".5em" }} />
+                    Cerrar sesión
+                  </Dropdown.Item>
+                  <p
+                    style={{
+                      textAlign: "center",
+                      marginTop: "1em",
+                      fontSize: ".8rem",
+                    }}
+                  >
+                    MinerPro
+                  </p>
+                </DropdownButton>
               </Navbar.Text>
             )}
           </Navbar.Collapse>

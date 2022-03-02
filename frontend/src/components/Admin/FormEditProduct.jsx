@@ -74,15 +74,23 @@ const FormEditProduct = ({
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicDescription">
+        <Form.Group
+          className="mb-3"
+          controlId="formBasicDescription"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "left",
+          }}
+        >
           <Form.Label className="label_form">Descripción</Form.Label>
-          <Form.Control
+          <textarea
             name="description"
+            style={{ height: "5em" }}
             value={productData.description}
-            type="text"
-            placeholder="Descripción"
+            placeholder="Descripción ..."
             onChange={(event) => handleChange(event, "description")}
-          />
+          ></textarea>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPrice">

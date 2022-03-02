@@ -1,9 +1,35 @@
-.button_menu_admin{
-    position: fixed;
-    height: 100%;
-    left: 0;
-    top: 0;
-    width: .5px;
-    border-width: 1px;
-    border-style: solid;
+.button_menu_admin {
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 0.5px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.button_controller_admin {
+  text-align: left;
+  margin-bottom: 1em;
+  background-color: transparent;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-style: none;
+  padding: 0.5em;
+}
+
+.button_controller_admin:hover {
+  color: white;
+  background: rgb(53, 228, 175);
+  background: linear-gradient(
+    90deg,
+    rgba(53, 228, 175, 1) 8%,
+    rgba(255, 255, 255, 0.9336776947106968) 100%
+  );
+}
+
+.container_user_detail {
+  box-shadow: -1px 3px 39px 11px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: -1px 3px 39px 11px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: -1px 3px 39px 11px rgba(0, 0, 0, 0.35);
 }

@@ -2,16 +2,19 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getEthermineData,
+  getEthermineMinerPoolstats,
   getEtherminePoolStats,
 } from "../../redux/actions/actions";
 import Card from "react-bootstrap/Card";
 import logo from "../../assets/images/logo minerPro.png";
+import "../../styles/client.css"
 
 const Mineros = ({ wallet }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getEthermineData(wallet));
+    dispatch(getEthermineMinerPoolstats(wallet))
     dispatch(getEtherminePoolStats());
     return () => {
       return;
@@ -25,7 +28,7 @@ const Mineros = ({ wallet }) => {
       <div style={{ textAlign: "left", marginLeft: "5%" }}>
         <h1 style={{ color: "white", fontWeight: "bolder" }}>Mineros</h1>
         {state.status === "OK" && (
-          <h4 style={{ color: "white" }}>
+          <h4 style={{ color: "white" }} className='mineros_subtitle'>
             Total de potencia de minado:{" "}
             {(state.data.currentStatistics.reportedHashrate / 1000000).toFixed(
               1

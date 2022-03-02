@@ -20,10 +20,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    housing_fee: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
     user_simplemining: {
       type: DataTypes.STRING,
       allowNull: false,

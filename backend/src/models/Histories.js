@@ -2,7 +2,6 @@ const { DataTypes, DATE } = require("sequelize");
 const { UUID } = require("uuid");
 
 module.exports = (sequelize) => {
-  let date = new Date()
   sequelize.define("history", {
     id: {
       type: DataTypes.UUID,
@@ -10,16 +9,15 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     date: {
-      type: DataTypes.DATE,
-      defaultValue: date.now,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     eth: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
     usd: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   });
