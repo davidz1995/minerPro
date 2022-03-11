@@ -1,14 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import AdminController from "./AdminController";
+import InProgress from "./InProgress";
 
 const BodyClient = ({wallet}) => {
   const state = useSelector((state) => state.selectedBodyAdmin);
   return (
     <div>
-      {state === "dashboard" && <p>Dashboard</p>}
-      {state === "balance" && <p>Balance</p>}
-      {state === "historial" && <p>Historial</p>}
+      {state === "dashboard" && <InProgress/>}
+      {state === "balance" && <InProgress/>}
+      {state === "historial" && <InProgress/>}
       {state === "admin" && <AdminController/>}
     </div>
   );

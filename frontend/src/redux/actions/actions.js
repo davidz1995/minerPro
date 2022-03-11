@@ -368,7 +368,7 @@ export const getHistories = (token) => {
 export const getUserByName = (token, name) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${API_URL}/users/${name}`, {
+      const response = await axios.get(`${API_URL}/users/name/${name}`, {
         headers: {
           Authorization: "Bearer " + token,
         },

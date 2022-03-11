@@ -42,10 +42,7 @@ class UserModel {
             userId: user.id,
             isAdmin: user.isAdmin,
           },
-          secret,
-          {
-            expiresIn: "2d",
-          }
+          secret
         );
         res.status(200).send({
           userData: {

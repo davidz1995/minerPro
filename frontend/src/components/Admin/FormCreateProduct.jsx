@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -18,27 +18,60 @@ const FormCreateProduct = ({
     thumbnail: "",
     numberOfCards: 0,
   });
+
+  const [previewImage, setPreviewImage] = useState(null);
+
   const handleChange = (event, name) => {
-    setProductData({
-      ...productData,
-      [name]: event.target.value,
+    if (name === "thumbnail") {
+      setProductData({
+        ...productData,
+        thumbnail: event.target.files[0],
+      });
+    } else {
+      setProductData({
+        ...productData,
+        [name]: event.target.value,
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (typeof productData.thumbnail === "object") {
+      let image = await toBase64(productData.thumbnail);
+      dispatch(
+        createProduct(
+          token,
+          productData.name,
+          productData.description,
+          productData.price,
+          image,
+          productData.numberOfCards
+        )
+      );
+    }
+    setShowCreateForm(false);
+    setShowMessageCreate(true);
+  };
+
+  const inputFileRef = useRef();
+
+  const toBase64 = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProduct(
-        token,
-        productData.name,
-        productData.description,
-        productData.price,
-        productData.thumbnail,
-        productData.numberOfCards
-      )
-    );
-    setShowCreateForm(false);
-    setShowMessageCreate(true);
+  const preview = (event) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
   };
 
   return (
@@ -104,14 +137,20 @@ const FormCreateProduct = ({
 
         <Form.Group className="mb-3" controlId="formBasicImage">
           <Form.Label className="label_form">Imágen</Form.Label>
-          <Form.Control
+          <input
+            ref={inputFileRef}
+            type="file"
             name="thumbnail"
-            value={productData.thumbnail}
-            type="text"
-            placeholder="URL de imágen ..."
-            onChange={(event) => handleChange(event, "thumbnail")}
+            onChange={(event) => {
+              handleChange(event, "thumbnail");
+              preview(event);
+            }}
+            accept=".jpg, .png, .jpeg"
+            style={{color:'white'}}
           />
         </Form.Group>
+
+        {previewImage && <img src={previewImage} alt="preview" style={{width:'auto', height:'10em'}}/>}
 
         <Form.Group className="mb-3">
           <Form.Label className="label_form">Cantidad de tarjetas</Form.Label>
@@ -128,7 +167,7 @@ const FormCreateProduct = ({
         {productData.name.length &&
           productData.description.length &&
           productData.price > 0 &&
-          productData.thumbnail.length &&
+          productData.thumbnail.name &&
           productData.numberOfCards > 0 && (
             <Button variant="primary" type="submit" onClick={handleSubmit}>
               Crear producto

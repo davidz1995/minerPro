@@ -27,7 +27,7 @@ function GPUvsASIC() {
               className="img_carousel"
               style={{
                 height: "87vh",
-                width: "90%",
+                width: "80vw",
                 backgroundSize: "inherit",
               }}
               src="https://i.ibb.co/HhbcSCy/asic-Image.jpg"
@@ -43,7 +43,7 @@ function GPUvsASIC() {
             >
               <h2>Qué es un {desASIC.title}?</h2>
               {desASIC.description.length &&
-                desGPU.description.map((line, index) => {
+                desASIC.description.map((line, index) => {
                   return <p key={index}>{line}</p>;
                 })}
             </Carousel.Caption>

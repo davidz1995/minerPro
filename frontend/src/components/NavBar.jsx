@@ -24,7 +24,7 @@ function NavBar(props) {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Link to="/" className="linkNavBar">
-                00 : Home
+                Home
               </Link>
               <p className="divider">|</p>
               {menuOptions.length &&
@@ -53,19 +53,19 @@ function NavBar(props) {
 const navBarOptions = () => {
   return [
     {
-      option: "01  :  GPU vs ASIC",
+      option: "GPU vs ASIC",
       route: "info",
     },
     {
-      option: "02  :  Nuestros productos",
+      option: "Nuestros productos",
       route: "products",
     },
     {
-      option: "03  :  FAQ",
+      option: "FAQ",
       route: "faq",
     },
     {
-      option: "04  :  Contacto",
+      option: "Contacto",
       route: "contact",
     },
     {

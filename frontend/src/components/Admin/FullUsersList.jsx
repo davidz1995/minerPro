@@ -6,6 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import "../../styles/users.css";
 import {
   deleteUser,
@@ -16,6 +17,7 @@ import {
 import FormEditUser from "./FormEditUser";
 import SearchUsers from "./SearchUsers";
 import { Link } from "react-router-dom";
+import UserDetail from "./UserDetail";
 
 function UserTable() {
   const [darkMode, setDarkMode] = useState("light");
@@ -25,6 +27,7 @@ function UserTable() {
   const [selectedUser, setSelectedUser] = useState("");
   const [showMessageDelete, setShowMessageDelete] = useState(true);
   const [showMessageUpdate, setShowMessageUpdate] = useState(true);
+  const [showUserDetail, setShowUserDetail] = useState(false);
   const dispatch = useDispatch();
   let users = useSelector((state) =>
     state.users.sort((a, b) => {
@@ -60,7 +63,7 @@ function UserTable() {
     >
       <Link
         to="/panelAdmin"
-        style={{ position: "absolute", color: "white", top: '0', left:'0' }}
+        style={{ position: "absolute", color: "white", top: "0", left: "0" }}
       >
         Volver a panel
       </Link>
@@ -144,7 +147,17 @@ function UserTable() {
         </div>
       )}
 
-      <h1 style={{color:'white', marginBottom:'1em'}}>Lista de usuarios completa</h1>
+      <h1 style={{ color: "white", marginBottom: "1em" }}>
+        Lista de usuarios completa
+      </h1>
+
+      {showUserDetail ? (
+        <UserDetail
+          setShowUserDetail={setShowUserDetail}
+          wallet={selectedUser.wallet}
+          fee={selectedUser.housing_fee}
+        />
+      ) : null}
 
       <SearchUsers />
 
@@ -195,6 +208,14 @@ function UserTable() {
                       onClick={() => {
                         setSelectedUser(user);
                         setShowEditForm(true);
+                      }}
+                    />
+                    <ReadMoreIcon
+                      className="edit_icon"
+                      style={{ marginRight: "1em" }}
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setShowUserDetail(true);
                       }}
                     />
                     <DeleteIcon

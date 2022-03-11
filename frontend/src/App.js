@@ -13,6 +13,7 @@ import Suspended from "./components/Suspended";
 import FullUsersList from "./components/Admin/FullUsersList"
 import FullMinersList from "./components/Admin/FullMinersList"
 import FullPayoutList from "./components/Admin/FullPayoutList"
+import RecoverPassword from "./components/RecoverPassword";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             {/* Client */}
             <Route exact path="/panelClient" element={<ClientPanel />} />
             <Route exact path="/suspended" element={<Suspended />} />
+            <Route exact path="/recover-password" element={<RecoverPassword />} />
           </Routes>
         </div>
       </Router>

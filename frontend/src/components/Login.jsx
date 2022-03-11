@@ -127,10 +127,10 @@ const Login = () => {
                   render={(error) => <p className="error_login">{error}</p>}
                 />
 
-                {/* <p>
+                <p>
                   Olvidaste tu contraseña?{" "}
-                  <Link to={"/restore-password"}>Haz click aquí.</Link>{" "}
-                </p> */}
+                  <Link to={"/recover-password"}>Haz click aquí.</Link>{" "}
+                </p>
 
                 <button
                   className="login_submit"
